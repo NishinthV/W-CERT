@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: w-cert-backend
+    env: python
+    rootDir: w-cert-backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false

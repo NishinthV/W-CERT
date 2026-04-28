@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 // Create centralized API client
 const api = axios.create({
-    baseURL: 'http://localhost:5000/api', // Point to Flask Backend
+    baseURL: baseURL,
     headers: {
         'Content-Type': 'application/json',
     },
