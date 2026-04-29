@@ -56,13 +56,20 @@ def _get_client():
         "https://www.googleapis.com/auth/drive"
     ]
 
-    # Resolve service account path
-    sa_path = current_app.config.get('SERVICE_ACCOUNT_PATH', '../service_account.json')
-    if not os.path.isabs(sa_path):
-        sa_path = os.path.join(current_app.root_path, '..', sa_path)
-    sa_path = os.path.abspath(sa_path)
+    # Try loading from environment variable first (for cloud deployment like Render)
+    sa_json = os.environ.get('SERVICE_ACCOUNT_JSON')
+    if sa_json:
+        import json
+        sa_info = json.loads(sa_json)
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(sa_info, scope)
+    else:
+        # Fall back to file path (for local development)
+        sa_path = current_app.config.get('SERVICE_ACCOUNT_PATH', '../service_account.json')
+        if not os.path.isabs(sa_path):
+            sa_path = os.path.join(current_app.root_path, '..', sa_path)
+        sa_path = os.path.abspath(sa_path)
+        creds = ServiceAccountCredentials.from_json_keyfile_name(sa_path, scope)
 
-    creds = ServiceAccountCredentials.from_json_keyfile_name(sa_path, scope)
     _sheets_client = gspread.authorize(creds)
     return _sheets_client
 
