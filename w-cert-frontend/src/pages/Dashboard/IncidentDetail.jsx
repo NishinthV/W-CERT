@@ -220,10 +220,8 @@ const IncidentDetail = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
                 {/* Main Content */}
                 <div className="lg:col-span-2 space-y-6">
-
                     {/* Description Card */}
                     <div className="cyber-card">
                         <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
@@ -233,7 +231,7 @@ const IncidentDetail = () => {
                             {incident.description}
                         </p>
                     </div>
-
+                    
                     {/* Evidence Card */}
                     <div className="cyber-card">
                         <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
@@ -270,9 +268,44 @@ const IncidentDetail = () => {
                             </div>
                         )}
                     </div>
+                    
+                    {/* Verification Analysis */}
+                    <div className="cyber-card border-yellow-500/30">
+                        <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <Activity className="w-5 h-5 text-yellow-500" /> Verification Analysis
+                        </h3>
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between p-3 bg-white/5 rounded">
+                                <span className="text-gray-400 text-sm">Authenticity Score</span>
+                                <span className={`font-mono font-bold ${
+                                    incident.authenticity_score >= 80 ? 'text-green-500' :
+                                    incident.authenticity_score < 40 ? 'text-alert-red' : 'text-yellow-500'
+                                }`}>{incident.authenticity_score}%</span>
+                            </div>
 
-                </div>
+                            <div className="space-y-2">
+                                <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">AI Forensic Deductions</div>
+                                {incident.verification_insights?.length > 0 ? (
+                                    incident.verification_insights.map((insight, i) => (
+                                        <div key={i} className="flex items-start gap-2 bg-black/40 p-2 rounded border border-white/5 text-xs text-gray-300">
+                                            <div className="mt-1 w-1.5 h-1.5 rounded-full bg-yellow-500 shrink-0" />
+                                            {insight}
+                                        </div>
+                                    ))
+                                ) : <div className="text-xs text-gray-600 italic">No flags.</div>}
+                            </div>
 
+                            {incident.ai_reasoning && (
+                                <div className="pt-3 border-t border-white/5">
+                                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2">AI Forensic Reasoning</div>
+                                    <div className="text-xs text-gray-400 italic bg-black/20 p-3 rounded border border-white/5 leading-relaxed">
+                                        &ldquo;{incident.ai_reasoning}&rdquo;
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    
                     {/* IPC Legal Sections */}
                     {incident.ipc_sections?.length > 0 && (
                         <div className="cyber-card border-purple-500/30">
@@ -289,23 +322,7 @@ const IncidentDetail = () => {
                             <p className="text-[10px] text-gray-600 mt-3 italic">AI-suggested sections. Confirm with legal counsel.</p>
                         </div>
                     )}
-
-                    {/* Evidence Gaps */}
-                    {incident.evidence_gaps?.length > 0 && (
-                        <div className="cyber-card border-orange-500/30">
-                            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <AlertCircle className="w-5 h-5 text-orange-400" /> Evidence Gaps
-                            </h3>
-                            <div className="space-y-2">
-                                {incident.evidence_gaps.map((gap, i) => (
-                                    <div key={i} className="flex items-start gap-2 text-xs text-orange-300 bg-orange-500/5 border border-orange-500/20 px-3 py-2 rounded">
-                                        <TrendingUp className="w-3 h-3 mt-0.5 shrink-0" />{gap}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-
+                    
                     {/* Similar Past Cases (RAG) */}
                     {similarCases.length > 0 && (
                         <div className="cyber-card border-green-500/30">
@@ -339,38 +356,10 @@ const IncidentDetail = () => {
                             <p className="text-[10px] text-gray-600 mt-3 italic">Retrieved via RAG similarity engine.</p>
                         </div>
                     )}
-
-                    {/* Chain of Custody */}
-                    <div className="cyber-card">
-                        <h3 className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">Chain of Custody</h3>
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 rounded bg-cyber-blue/5 border border-cyber-blue/20 flex items-center justify-center">
-                                <User className="w-5 h-5 text-cyber-blue" />
-                            </div>
-                            <div>
-                                <div className="text-gray-400 text-xs font-mono uppercase tracking-wider">Reporter ID</div>
-                                <div className="text-white text-sm font-bold font-mono">{incident.reporter_id}</div>
-                            </div>
-                        </div>
-                        <div className="space-y-3">
-                            <div className="p-3 bg-white/5 rounded border border-white/5">
-                                <div className="text-gray-500 text-[10px] uppercase font-bold mb-1">Encrypted Name</div>
-                                <div className="text-xs text-gray-300 break-all font-mono">{incident.encrypted_name || 'NULL'}</div>
-                            </div>
-                            <div className="p-3 bg-white/5 rounded border border-white/5">
-                                <div className="text-gray-500 text-[10px] uppercase font-bold mb-1">Encrypted Contact</div>
-                                <div className="text-xs text-gray-300 break-all font-mono">{incident.encrypted_contact || 'NULL'}</div>
-                            </div>
-                        </div>
-                        <p className="text-[10px] text-gray-600 mt-4 leading-tight italic">
-                            * PII encrypted at rest using AES-256 GCM.
-                        </p>
-                    </div>
-
+                </div>
 
                 {/* Sidebar Analysis */}
                 <div className="space-y-6">
-
                     {/* AI Threat Score Card */}
                     <div className="cyber-card border-cyber-blue/50 shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                         <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
@@ -437,47 +426,52 @@ const IncidentDetail = () => {
                             </div>
                         </div>
                     </div>
-
-                    {/* Verification Analysis */}
-                    <div className="cyber-card border-yellow-500/30">
-                        <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                            <Activity className="w-5 h-5 text-yellow-500" /> Verification Analysis
-                        </h3>
-                        <div className="space-y-4">
-                            <div className="flex items-center justify-between p-3 bg-white/5 rounded">
-                                <span className="text-gray-400 text-sm">Authenticity Score</span>
-                                <span className={`font-mono font-bold ${
-                                    incident.authenticity_score >= 80 ? 'text-green-500' :
-                                    incident.authenticity_score < 40 ? 'text-alert-red' : 'text-yellow-500'
-                                }`}>{incident.authenticity_score}%</span>
-                            </div>
-
+                    
+                    {/* Evidence Gaps */}
+                    {incident.evidence_gaps?.length > 0 && (
+                        <div className="cyber-card border-orange-500/30">
+                            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                <AlertCircle className="w-5 h-5 text-orange-400" /> Evidence Gaps
+                            </h3>
                             <div className="space-y-2">
-                                <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">AI Forensic Deductions</div>
-                                {incident.verification_insights?.length > 0 ? (
-                                    incident.verification_insights.map((insight, i) => (
-                                        <div key={i} className="flex items-start gap-2 bg-black/40 p-2 rounded border border-white/5 text-xs text-gray-300">
-                                            <div className="mt-1 w-1.5 h-1.5 rounded-full bg-yellow-500 shrink-0" />
-                                            {insight}
-                                        </div>
-                                    ))
-                                ) : <div className="text-xs text-gray-600 italic">No flags.</div>}
-                            </div>
-
-                            {incident.ai_reasoning && (
-                                <div className="pt-3 border-t border-white/5">
-                                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2">AI Forensic Reasoning</div>
-                                    <div className="text-xs text-gray-400 italic bg-black/20 p-3 rounded border border-white/5 leading-relaxed">
-                                        &ldquo;{incident.ai_reasoning}&rdquo;
+                                {incident.evidence_gaps.map((gap, i) => (
+                                    <div key={i} className="flex items-start gap-2 text-xs text-orange-300 bg-orange-500/5 border border-orange-500/20 px-3 py-2 rounded">
+                                        <TrendingUp className="w-3 h-3 mt-0.5 shrink-0" />{gap}
                                     </div>
-                                </div>
-                            )}
+                                ))}
+                            </div>
                         </div>
+                    )}
+                    
+                    {/* Chain of Custody */}
+                    <div className="cyber-card">
+                        <h3 className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">Chain of Custody</h3>
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 rounded bg-cyber-blue/5 border border-cyber-blue/20 flex items-center justify-center">
+                                <User className="w-5 h-5 text-cyber-blue" />
+                            </div>
+                            <div>
+                                <div className="text-gray-400 text-xs font-mono uppercase tracking-wider">Reporter ID</div>
+                                <div className="text-white text-sm font-bold font-mono">{incident.reporter_id}</div>
+                            </div>
+                        </div>
+                        <div className="space-y-3">
+                            <div className="p-3 bg-white/5 rounded border border-white/5">
+                                <div className="text-gray-500 text-[10px] uppercase font-bold mb-1">Encrypted Name</div>
+                                <div className="text-xs text-gray-300 break-all font-mono">{incident.encrypted_name || 'NULL'}</div>
+                            </div>
+                            <div className="p-3 bg-white/5 rounded border border-white/5">
+                                <div className="text-gray-500 text-[10px] uppercase font-bold mb-1">Encrypted Contact</div>
+                                <div className="text-xs text-gray-300 break-all font-mono">{incident.encrypted_contact || 'NULL'}</div>
+                            </div>
+                        </div>
+                        <p className="text-[10px] text-gray-600 mt-4 leading-tight italic">
+                            * PII encrypted at rest using AES-256 GCM.
+                        </p>
                     </div>
-
-
                 </div>
             </div>
+
 
             {/* Escalation Modal */}
             {showEscalateModal && (
