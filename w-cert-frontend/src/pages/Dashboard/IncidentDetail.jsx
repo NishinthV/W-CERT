@@ -273,6 +273,101 @@ const IncidentDetail = () => {
 
                 </div>
 
+                    {/* IPC Legal Sections */}
+                    {incident.ipc_sections?.length > 0 && (
+                        <div className="cyber-card border-purple-500/30">
+                            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                <Scale className="w-5 h-5 text-purple-400" /> Applicable Legal Sections
+                            </h3>
+                            <div className="space-y-2">
+                                {incident.ipc_sections.map((sec, i) => (
+                                    <div key={i} className="text-xs bg-purple-500/5 border border-purple-500/20 text-purple-300 px-3 py-2 rounded font-mono">
+                                        {sec}
+                                    </div>
+                                ))}
+                            </div>
+                            <p className="text-[10px] text-gray-600 mt-3 italic">AI-suggested sections. Confirm with legal counsel.</p>
+                        </div>
+                    )}
+
+                    {/* Evidence Gaps */}
+                    {incident.evidence_gaps?.length > 0 && (
+                        <div className="cyber-card border-orange-500/30">
+                            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                <AlertCircle className="w-5 h-5 text-orange-400" /> Evidence Gaps
+                            </h3>
+                            <div className="space-y-2">
+                                {incident.evidence_gaps.map((gap, i) => (
+                                    <div key={i} className="flex items-start gap-2 text-xs text-orange-300 bg-orange-500/5 border border-orange-500/20 px-3 py-2 rounded">
+                                        <TrendingUp className="w-3 h-3 mt-0.5 shrink-0" />{gap}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Similar Past Cases (RAG) */}
+                    {similarCases.length > 0 && (
+                        <div className="cyber-card border-green-500/30">
+                            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                <Activity className="w-5 h-5 text-green-400" /> Similar Past Cases
+                            </h3>
+                            <div className="space-y-3">
+                                {similarCases.map((sim, i) => (
+                                    <Link key={i} to={`/dashboard/incidents/${sim.incident_id}`} className="block bg-green-500/5 hover:bg-green-500/10 border border-green-500/20 p-3 rounded transition-colors group">
+                                        <div className="flex justify-between items-start mb-1">
+                                            <div className="text-sm font-bold text-green-300 font-mono group-hover:text-green-400">
+                                                ID: {sim.incident_id}
+                                            </div>
+                                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                                                sim.severity === 'CRITICAL' ? 'bg-red-500/20 text-red-400' :
+                                                sim.severity === 'HIGH' ? 'bg-orange-500/20 text-orange-400' :
+                                                'bg-yellow-500/20 text-yellow-400'
+                                            }`}>
+                                                {sim.severity}
+                                            </span>
+                                        </div>
+                                        <div className="text-xs text-gray-400 mb-2 truncate">
+                                            {sim.attack_type}
+                                        </div>
+                                        <div className="text-[10px] text-gray-500">
+                                            <span className="text-green-500 font-bold">{sim.similarity_score}% Match:</span> {sim.match_reason}
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                            <p className="text-[10px] text-gray-600 mt-3 italic">Retrieved via RAG similarity engine.</p>
+                        </div>
+                    )}
+
+                    {/* Chain of Custody */}
+                    <div className="cyber-card">
+                        <h3 className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">Chain of Custody</h3>
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 rounded bg-cyber-blue/5 border border-cyber-blue/20 flex items-center justify-center">
+                                <User className="w-5 h-5 text-cyber-blue" />
+                            </div>
+                            <div>
+                                <div className="text-gray-400 text-xs font-mono uppercase tracking-wider">Reporter ID</div>
+                                <div className="text-white text-sm font-bold font-mono">{incident.reporter_id}</div>
+                            </div>
+                        </div>
+                        <div className="space-y-3">
+                            <div className="p-3 bg-white/5 rounded border border-white/5">
+                                <div className="text-gray-500 text-[10px] uppercase font-bold mb-1">Encrypted Name</div>
+                                <div className="text-xs text-gray-300 break-all font-mono">{incident.encrypted_name || 'NULL'}</div>
+                            </div>
+                            <div className="p-3 bg-white/5 rounded border border-white/5">
+                                <div className="text-gray-500 text-[10px] uppercase font-bold mb-1">Encrypted Contact</div>
+                                <div className="text-xs text-gray-300 break-all font-mono">{incident.encrypted_contact || 'NULL'}</div>
+                            </div>
+                        </div>
+                        <p className="text-[10px] text-gray-600 mt-4 leading-tight italic">
+                            * PII encrypted at rest using AES-256 GCM.
+                        </p>
+                    </div>
+
+
                 {/* Sidebar Analysis */}
                 <div className="space-y-6">
 
@@ -380,99 +475,6 @@ const IncidentDetail = () => {
                         </div>
                     </div>
 
-                    {/* IPC Legal Sections */}
-                    {incident.ipc_sections?.length > 0 && (
-                        <div className="cyber-card border-purple-500/30">
-                            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <Scale className="w-5 h-5 text-purple-400" /> Applicable Legal Sections
-                            </h3>
-                            <div className="space-y-2">
-                                {incident.ipc_sections.map((sec, i) => (
-                                    <div key={i} className="text-xs bg-purple-500/5 border border-purple-500/20 text-purple-300 px-3 py-2 rounded font-mono">
-                                        {sec}
-                                    </div>
-                                ))}
-                            </div>
-                            <p className="text-[10px] text-gray-600 mt-3 italic">AI-suggested sections. Confirm with legal counsel.</p>
-                        </div>
-                    )}
-
-                    {/* Evidence Gaps */}
-                    {incident.evidence_gaps?.length > 0 && (
-                        <div className="cyber-card border-orange-500/30">
-                            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <AlertCircle className="w-5 h-5 text-orange-400" /> Evidence Gaps
-                            </h3>
-                            <div className="space-y-2">
-                                {incident.evidence_gaps.map((gap, i) => (
-                                    <div key={i} className="flex items-start gap-2 text-xs text-orange-300 bg-orange-500/5 border border-orange-500/20 px-3 py-2 rounded">
-                                        <TrendingUp className="w-3 h-3 mt-0.5 shrink-0" />{gap}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Similar Past Cases (RAG) */}
-                    {similarCases.length > 0 && (
-                        <div className="cyber-card border-green-500/30">
-                            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <Activity className="w-5 h-5 text-green-400" /> Similar Past Cases
-                            </h3>
-                            <div className="space-y-3">
-                                {similarCases.map((sim, i) => (
-                                    <Link key={i} to={`/dashboard/incidents/${sim.incident_id}`} className="block bg-green-500/5 hover:bg-green-500/10 border border-green-500/20 p-3 rounded transition-colors group">
-                                        <div className="flex justify-between items-start mb-1">
-                                            <div className="text-sm font-bold text-green-300 font-mono group-hover:text-green-400">
-                                                ID: {sim.incident_id}
-                                            </div>
-                                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
-                                                sim.severity === 'CRITICAL' ? 'bg-red-500/20 text-red-400' :
-                                                sim.severity === 'HIGH' ? 'bg-orange-500/20 text-orange-400' :
-                                                'bg-yellow-500/20 text-yellow-400'
-                                            }`}>
-                                                {sim.severity}
-                                            </span>
-                                        </div>
-                                        <div className="text-xs text-gray-400 mb-2 truncate">
-                                            {sim.attack_type}
-                                        </div>
-                                        <div className="text-[10px] text-gray-500">
-                                            <span className="text-green-500 font-bold">{sim.similarity_score}% Match:</span> {sim.match_reason}
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                            <p className="text-[10px] text-gray-600 mt-3 italic">Retrieved via RAG similarity engine.</p>
-                        </div>
-                    )}
-
-                    {/* Chain of Custody */}
-                    <div className="cyber-card">
-                        <h3 className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">Chain of Custody</h3>
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 rounded bg-cyber-blue/5 border border-cyber-blue/20 flex items-center justify-center">
-                                <User className="w-5 h-5 text-cyber-blue" />
-                            </div>
-                            <div>
-                                <div className="text-gray-400 text-xs font-mono uppercase tracking-wider">Reporter ID</div>
-                                <div className="text-white text-sm font-bold font-mono">{incident.reporter_id}</div>
-                            </div>
-                        </div>
-                        <div className="space-y-3">
-                            <div className="p-3 bg-white/5 rounded border border-white/5">
-                                <div className="text-gray-500 text-[10px] uppercase font-bold mb-1">Encrypted Name</div>
-                                <div className="text-xs text-gray-300 break-all font-mono">{incident.encrypted_name || 'NULL'}</div>
-                            </div>
-                            <div className="p-3 bg-white/5 rounded border border-white/5">
-                                <div className="text-gray-500 text-[10px] uppercase font-bold mb-1">Encrypted Contact</div>
-                                <div className="text-xs text-gray-300 break-all font-mono">{incident.encrypted_contact || 'NULL'}</div>
-                            </div>
-                        </div>
-                        <p className="text-[10px] text-gray-600 mt-4 leading-tight italic">
-                            * PII encrypted at rest using AES-256 GCM.
-                        </p>
-                    </div>
 
                 </div>
             </div>
