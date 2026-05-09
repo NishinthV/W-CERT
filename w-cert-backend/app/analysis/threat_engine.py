@@ -79,7 +79,7 @@ def analyze_threat(description):
         ]
 
     return {
-        'score': total_score,
+        'score': min(total_score, 100),
         'severity': severity.value,
         'detected_tags': list(set(detected_tags)),  # Remove duplicates
         'attack_vectors': sorted(list(detected_categories)),

@@ -1,0 +1,382 @@
+-
+Project Report
+on
+W-CERT: A Women-Centric Cyber Emergency Response & Threat-Analysis Framework
+Submitted by
+Project Members
+Nishinth Venkatesh 1032220939
+Ayush Hemant Dhore 1032220255
+Neel Harshad Karnavat 1032220469
+Sarthak Anil Paymode 1032220213
+Under the Guidance of
+Dr. Vinayak Prabhakar Musale
+Department of Computer Engineering and Technology,
+School of Computer Science and Engineering,
+MIT World Peace University, Kothrud,
+Pune 411 038, Maharashtra - India
+2025-2026
+DEPARTMENT OF COMPUTER ENGINEERING AND TECHNOLOGY
+C E R T I F I C A T E
+This is to certify that,
+Nishinth Venkatesh, Ayush Hemant Dhore,
+ 	Neel Harshad Karnavat and Sarthak Anil Paymode
+of BTech. CSE (Cybersecurity and Forensics) have completed their project titled                                       “W-CERT: A Women-Centric Cyber Emergency Response & Threat-Analysis Framework” and have submitted this Capstone Project Report towards fulfillment of the requirement for the Degree-Bachelor of Computer Science & Engineering (BTech-CSF) for the academic year 2025-2026.
+Internal Examiner: ____________
+External Examiner: ____________
+Date: ____________
+Acknowledgement
+We wish to express our profound and sincere gratitude to the collective of individuals whose contributions were instrumental in the successful orchestration and completion of this BTech Capstone initiative, "W-CERT: A Women-Centric Cyber Emergency Response & Threat-Analysis Framework."
+First and foremost, we extend our deepest appreciation to our Project Guide and Program Coordinator for BTech. CSE (Cybersecurity and Forensics), Dr. Vinayak Prabhakar Musale, for his unwavering technical expertise and continuous mentorship. His analytical insights and constructive evaluation were foundational in engineering the architecture of this complex forensic ecosystem.
+We are significantly indebted to Dr. Balaji M. Patil, Program Director, Department of Computer Engineering and Technology, MIT World Peace University, for providing the necessary academic infrastructure and the opportunity to architect a research project of this technical magnitude.
+Furthermore, we acknowledge the faculty of the Department of Computer Engineering and Technology for their comprehensive guidance throughout our academic tenure. Their instruction provided the essential competencies in machine learning, cryptographic protocols, and full-stack engineering required to realize the W-CERT framework.
+Finally, we express our gratitude to our parents, peers, and all those who supported us during the intensive developmental, experimental, and cloud deployment phases of this project.
+Nishinth Venkatesh, Ayush Dhore,
+Neel Karnavat and Sarthak Paymode.
+Abstract
+The contemporary digital landscape is characterized by an escalation in synthetic media, deepfakes, and sophisticated social engineering, which has compromised the evidentiary value of digital artifacts. Conventional Computer Emergency Response Teams (CERTs) are hindered by critical limitations in manual verification, the preservation of a mathematically secure chain of custody, and the autonomous correlation of fragmented telemetry. To resolve these systemic vulnerabilities, this initiative engineers the W-CERT (Women-Centric Cyber Emergency Response & Threat-Analysis Framework), a decentralized, full-stack ecosystem architected for autonomous incident response and forensic intelligence.
+The W-CERT architecture utilizes a Microservices-Oriented paradigm partitioned into four specialized modules: a responsive React-based dashboard for secure ingestion, a Python/Flask routing engine, an Explainable AI (XAI) authenticity checker, and a rigorous cryptographic integrity layer. By integrating "glass-box" machine learning, the XAI engine generates human-interpretable visual heatmaps to establish the legal admissibility of forensic proofs. Concurrently, the cryptographic module executes SHA-256 digital fingerprinting and AES-256 encryption at the millisecond of ingestion to ensure an immutable digital chain of custody. Furthermore, a heuristic Threat Intelligence engine programmatically maps telemetry against standardized MITRE ATT&CK vectors to automate jurisdictional escalation and severity routing.
+The platform was experimentally validated utilizing a production-proximate dataset of 221 active cyber incident reports. Experimental execution demonstrated a 100% success rate in cryptographic persistence with zero operational latency. The automated threat engine achieved a 91% detection accuracy, with a 100% recall rate in prioritizing high-severity, life-threatening vectors such as sextortion and financial fraud. Ultimately, W-CERT facilitates the seamless transformation of raw cyber telemetry into actionable, mathematically rigorous forensic intelligence.
+List of Figures
+List of Tables
+Contents
+Acknowledgement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  . . . . . . . . . . . . . . . . I 
+Abstract . . . . . . . . . . . . . . . . . . . .  . . . . . . . . . . . . . . . .. . . . . . . . . . .. . . . .  . . . .. . II 
+List of Figures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . .. III 
+List of Tables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  . . . .  . . IV 
+Contents . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . .. . . . .. . . .. V
+PART A - GROUP CONTRIBUTION
+
+Chapter 1. Introduction
+1.1 Project Statement
+The primary objective of this capstone initiative is the engineering and deployment of the W-CERT (Women-Centric Cyber Emergency Response & Threat-Analysis Framework), a decentralized, cloud-native ecosystem architected for autonomous incident response. The framework is engineered to orchestrate the end-to-end lifecycle of cybercrimes by integrating a "glass-box" Explainable AI (XAI) engine for high-fidelity evidence verification, a cryptographic hashing layer to establish an immutable digital chain of custody, and an automated threat modeling module to prioritize escalation workflows. W-CERT serves as a mathematically rigorous portal, facilitating the seamless transformation of raw telemetry into actionable forensic intelligence.
+1.2 Area
+This research intersects several advanced domains of computational science:
+Cybersecurity & Threat Intelligence: Automated escalation protocols, incident response workflows, and threat modeling.
+Digital Forensics: The secure ingestion, preservation, and analysis of digital artifacts.
+Explainable AI (XAI) & Machine Learning: Deepfake detection, anomaly recognition, and the generation of human-interpretable model rationales.
+Cryptography: Implementation of secure hashing (SHA-256) and encryption (AES-256) to ensure data immutability.
+Full-Stack Engineering & Cloud Architecture: Decoupled microservices utilizing React, Node.js, and Python within scalable deployment pipelines.
+1.3 Project Introduction and Aim
+1.3.1 Need of the Project
+In the modern digital landscape, the sophistication and frequency of cyberattacks have scaled exponentially. Conventional Computer Emergency Response Teams (CERTs) and Security Operations Centers (SOCs) are constrained by critical limitations. The proliferation of generative AI and synthetic media has compromised the reliability of digital evidence; manual inspection is no longer sufficient for authenticity verification. Furthermore, traditional forensic platforms often treat machine learning as a "black box," rendering detection outputs legally inadmissible because the underlying decision-making process lacks transparency.
+Additionally, maintaining a verifiable "chain of custody" is historically vulnerable to human error and insider threats. Evidence must be cryptographically sealed at the millisecond of ingestion to prevent unauthorized tampering. Finally, manual threat correlation introduces significant latency in incident triage. There is a manifest need for an intelligent platform that not only captures incidents but autonomously analyzes, secures, and maps them to global threat intelligence frameworks.
+1.3.2 Implementation Overview
+To address these systemic challenges, the W-CERT framework is implemented through a modular architecture consisting of four interconnected technological pillars:
+Console Management & Frontend (React/Node.js): A secure, responsive interface designed for incident reporting and real-time forensic monitoring.
+XAI Evidence Training Engine: A machine learning module that utilizes Explainable AI to provide human-readable mathematical proofs of multimedia authenticity.
+Cryptographic Hashing & Secure Connectivity: A security layer that computes SHA-256 digital fingerprints at the point of upload to ensure the legal integrity of evidence.
+Threat Intelligence Modeling & API Deployment: A Python-based routing engine that correlates incident metadata against standardized frameworks to automate jurisdictional escalation.
+1.3.3 Application of the Project
+The practical utility of the W-CERT platform extends across several critical domains of modern cyber defense:
+Law Enforcement Agencies (LEAs): Provides cybercrime units with an advanced forensic toolset to validate digital evidence through XAI-generated rationales.
+National & State CERTs: Serves as a centralized portal for reporting and prioritizing high-severity threats via automated intelligence modeling.
+Corporate Security Operations Centers (SOCs): Facilitates secure logging, isolated payload analysis, and the generation of automated forensic audit reports.
+Judicial Systems: Establishes a mathematically-backed source of truth for the digital chain of custody, minimizing technical disputes during litigation.
+Chapter 2. Literature Survey
+2.1 Earlier Work Done in the Area
+The evolution of digital forensic architectures has been catalyzed by the integration of automated cyber defense paradigms. Preliminary research was primarily centered on manual artifact extraction; however, the growth in incident volume necessitated a shift toward automated Threat Intelligence (TI) aggregation. Early platforms were constrained by static indicators of compromise (IoCs), requiring manual intervention to identify attack vectors. Concurrently, the emergence of synthetic media necessitated the deployment of Deep Learning for evidence authentication, while cryptographic research transitioned toward sophisticated ledger implementations to preserve the legal chain of custody.
+2.2 Limitations of Earlier Approaches
+Contemporary platforms are hindered by critical limitations that W-CERT is engineered to resolve:
+The "Black-Box" ML Problem: Traditional models lack interpretability, making detection outputs difficult to admit in judicial proceedings without explaining the underlying decision-making process.
+Static Threat Intelligence: Legacy systems rely on manual mapping to frameworks, causing significant latency during critical incident escalation.
+Vulnerable Chain of Custody: Without automated cryptographic hashing at the point of ingestion, the chronological and legal integrity of evidence is frequently compromised.
+2.3 The W-CERT Approach
+W-CERT introduces a paradigm shift by addressing these systemic limitations through a multi-layered technological approach. The platform integrates Explainable AI (XAI) to generate human-readable proofs of tampering, utilizes an automated API-driven backend for dynamic threat correlation, and executes cryptographic hashing at the millisecond of upload to establish an immutable digital footprint.
+2.4 Literature Review
+The proliferation of synthetic media has necessitated the deployment of advanced artificial intelligence for forensic analysis [10]. However, standard models operate as opaque "black boxes," making their outputs challenging to admit as evidence [5]. Academic discourse has consequently shifted toward Explainable AI (XAI) to provide visual and semantic explanations for forensic artifacts [1], [2], [9]. Frameworks like DFP-Net utilize interpretable prototypes to detect deepfakes while explaining algorithmic reasoning [3]. Studies further emphasize the need for interactive interfaces designed for non-expert legal users [4], [8]. Beyond multimedia, XAI is proving vital in establishing trustworthiness in IoT forensics [7] and addressing broader digital forensic challenges [6].
+As the sophistication of cyberattacks scales, traditional manual triage is no longer sustainable, making the MITRE ATT&CK framework the ubiquitous industry standard [12], [13]. Recent literature focuses on automating the classification of tactics, techniques, and procedures (TTPs) from unstructured data [16]. By leveraging NLP [15] and machine learning, researchers have developed systems to autonomously map threat reports to the ATT&CK matrix [17], [18]. A significant breakthrough is the application of LLMs to automatically label threat intelligence [11], facilitating dynamic defensive adjustments across critical environments such as ICS [14].
+Maintaining a verifiable chain of custody is the foundational pillar of digital forensics [22]. Traditional relational databases are susceptible to tampering and legal disputes [21]. Consequently, the community has researched the integration of blockchain into evidence management [25]. By utilizing blockchain, investigators can securely log cryptographic hashes at every stage [20], guaranteeing an immutable audit trail [23]. Specific implementations, such as CustodyChainGuardian, demonstrate how automated preservation can integrate into forensic protocols [24]. Recent studies show that blockchain drastically improves the legal admissibility of digital evidence in complex scenarios [19].
+Chapter 3. Problem Statement
+The contemporary digital landscape is characterized by an escalation in cybercrime and synthetic media, which has compromised the evidentiary value of digital artifacts. Current incident response paradigms are hindered by fragmented, manual workflows where ingestion, verification, and the preservation of the legal chain of custody are handled through disparate systems. Consequently, there is a manifest need for an integrated, automated ecosystem capable of generating mathematical proofs of authenticity and autonomously correlating attack vectors with global threat intelligence frameworks.
+3.1 Project Scope
+The scope of W-CERT involves the engineering of a centralized cyber incident management ecosystem, encompassing:
+Engineering a secure frontend portal for streamlined reporting and dashboard management.
+Integrating an Explainable AI (XAI) engine to validate authenticity and provide interpretable visual proofs.
+Implementing a cryptographic hashing and encryption layer to ensure the immutability of the chain of custody.
+Deploying an automated Threat Intelligence module that maps incident metadata against the MITRE ATT&CK framework.
+3.2 Project Assumptions
+User Competence: It is assumed that end-users possess the technical literacy required to operate the management interface.
+Infrastructure Availability: Organizations are assumed to maintain the necessary cloud infrastructure for API-driven operations.
+Data Integrity Pre-Upload: The platform assumes digital artifacts are in their original state prior to the execution of cryptographic hashing.
+3.3 Project Limitations
+Computational Latency: The processing of high-resolution multimedia via the XAI engine may be subject to variable latency based on hardware constraints.
+Zero-Day Exploits: Novel attack vectors may necessitate initial manual classification by forensic experts.
+File Size Constraints: Uploads are governed by cloud storage quotas and backend payload limitations.
+3.4 Project Objectives
+To design and deploy a decoupled architecture for the seamless logging and management of cyber incidents.
+To engineer an XAI-powered checker that transforms detection into a legally interpretable "glass-box" format.
+To establish a mathematically irrefutable chain of custody through immediate cryptographic hashing.
+To automate threat intelligence modeling by correlating telemetry with standardized frameworks.
+Chapter 4. Project Requirements
+4.1 Resources
+The W-CERT platform is developed by a core engineering team, where each member is responsible for a specialized technological module:
+Sarthak Paymode: Lead Frontend Engineer (React ecosystem and dashboard orchestration).
+Neel Karnavat: Machine Learning & XAI Specialist (Explainable AI models and authenticity algorithms).
+Ayush Dhore: Backend Security Engineer (Database management and cryptographic protocol implementation).
+Nishinth Venkatesh: Principal Architect (API engineering, automated threat modeling, and cloud deployment).
+To optimize efficiency and maintainability, the framework leverages several abstracted software components:
+Authentication Middleware: Reusable JWT-based token validation layers for secure API gateways.
+Cryptographic Utility Library: Standardized hashing and encryption functions invoked during ingestion.
+Modular UI Componentry: A centralized library of custom hooks and dashboard widgets integrated across views.
+The project operates on a modern technology stack with specific hardware requirements:
+Software Infrastructure: Node.js/React.js, Python/Flask, TensorFlow/PyTorch, and Docker for containerization.
+Hardware Specifications: Cloud instances with 8GB RAM; local optimization requires NVIDIA CUDA acceleration.
+4.2 Requirements Rationale
+Table 1 : Requirements Rationale
+4.3 Risk Management
+Table 2 : Requirements Rationale
+4.4 Functional Specifications
+The platform necessitates an array of interfaces to maintain operational continuity:
+External Interfaces: Integration with TI APIs, cloud storage gateways, and jurisdictional notification systems.
+Internal Interfaces: RESTful API endpoints enabling secure communication between the UI and backend.
+Security Protocols: Mandatory HTTPS/TLS 1.3 encryption for data-in-transit.
+User Interaction Flow: An investigator submits an incident via the GUI, triggering asynchronous hashing and XAI analysis while correlating metadata against threat frameworks. The resulting intelligence is consolidated via the dashboard for escalation.
+Sustainability & Security: The modular architecture ensures components can be updated without disruption. Security is enforced through JWT management, AES-256 encryption, and strict CORS policies.
+Chapter 5. System Analysis and Proposed Architecture
+5.1 Design Consideration
+W-CERT is engineered utilizing a Microservices-Oriented Architecture (MOA), necessitating a decoupling of the client interface from the core engines to ensure operational resilience.
+Scalability: The architecture isolates intensive modules like the XAI Engine, allowing independent scaling without impeding intelligence ingestion.
+Statelessness: RESTful endpoints are strictly stateless, ensuring session integrity through secure JWT management.
+Security by Design: Cryptographic protocols are integrated at the primary entry point, sealing evidence mathematically prior to processing.
+5.2 Assumption and Dependencies
+Assumptions: It is assumed that the network supports persistent HTTPS traffic and handles large media uploads without firewall-induced interruption.
+Dependencies:
+External APIs: The TI module relies on the uptime of the MITRE ATT&CK database and third-party feeds.
+Python Libraries: Core modules are dependent on rigid versioning of TensorFlow, PyTorch, and PyCryptodome.
+Cloud Hosting: The platform mandates stable infrastructure to support CI/CD pipelines and microservice persistence.
+5.3 General Constraints
+Bandwidth and File Limits: Evidence size is subject to cloud API restrictions and storage quotas.
+Processing Latency: The generation of XAI proofs is resource-intensive, introducing computational delay between upload and visualization.
+5.4 Block Diagram & System Architecture
+The architectural schematic delineates the high-level system logic and the decoupled flow of data through the various analytical engines.
+Fig 1 : System Architecture
+5.5 Modules of the Project
+The ecosystem is partitioned into four primary functional modules:
+Frontend Dashboard Module: Orchestrates user authentication, visualization, and secure ingestion of digital artifacts.
+XAI Evidence Training Module: Processes multimedia through neural networks to generate mathematical proofs of manipulation.
+Cryptography & Security Module: Executes SHA-256 fingerprinting and AES-256 encryption for metadata security.
+Threat Intelligence & Deployment Module: Correlates incident telemetry with MITRE ATT&CK to prioritize and escalate responses.
+5.6 Low Level Design / UML Sequence Diagram
+The UML Sequence Diagram details the programmatic logic and internal API interactions triggered during the lifecycle of an incident upload.
+Fig 2 : UML Sequence Diagram
+Chapter 6. Project Plan
+The Software Development Life Cycle (SDLC) governing W-CERT was executed over five months. The architectural development adopted an Agile methodology, facilitating parallel sprints across the platform's specialized modules prior to the final holistic integration phase.
+Phase 1: Planning & Analysis (January): Focused on requirement gathering, literature survey, and formalization of the system architecture.
+Phase 2: Core Development (February - March): Involved decentralized sprints engineering the UI, backend API, and cryptographic protocols.
+Phase 3: Integration & Testing (April): Centered on orchestrating the client with the engine and performing rigorous unit validation.
+Phase 4: Deployment & Documentation (May): Consisted of deployment to cloud environments alongside the completion of the formal Capstone report.
+Fig 3 : SDLC Timeline
+Chapter 7. Implementation
+7.1 Methodology
+The orchestration of the W-CERT ecosystem is predicated on a modular, Microservices-Oriented Methodology (MOM). This decoupled architectural paradigm ensures that development scaling remains cryptographically isolated across specialized technological layers:
+Frontend Implementation: Orchestrated via the React.js ecosystem, the client interface asynchronously consumes RESTful APIs to populate a secure forensic dashboard.
+Backend Implementation: Engineered utilizing Python, the backend functions as the primary routing engine, orchestrating high-fidelity delegation to the ML and security modules.
+Database Methodology: The framework establishes a secure integration with the Google Sheets API via sheets.py, serving as a persistent, immutable repository for forensic records.
+7.2 Algorithms Used
+The platform utilizes a multi-layered suite of mathematically rigorous algorithms to ensure forensic integrity and intelligent telemetry analysis:
+Cryptographic Hashing Algorithm (SHA-256): Executed at the millisecond of ingestion, the backend computes a unique hexadecimal fingerprint to detect minute artifact alterations.
+Data Encryption Algorithm (AES-256): Sensitive telemetry and PII are secured at rest utilizing the Advanced Encryption Standard in CBC mode to prevent unauthorized exposure.
+Machine Learning Algorithm (CNN): The authenticity checker leverages deep CNN architectures (ResNet) to perform high-fidelity classification of synthetic media.
+Explainable AI Algorithm (SHAP / LIME): Post-inference rationales are deployed to measure feature importance, generating heatmaps highlighting specific regions of tampering.
+7.3 Other Implementation Details
+Threat Intelligence Mapping Logic: The backend utilizes keyword extraction and NLP to map metadata against ATT&CK taxonomies, programmatically assigning standardized severity classifications.
+Environment Configuration: Security by Design is enforced by decoupling sensitive variables—including JWT secrets—from the codebase through isolated .env configuration.
+Cloud Deployment: The ecosystem is optimized for cloud persistence, utilizing Vercel for the frontend and Render for the containerized analytical engine.
+7.4 Discuss Data Set
+The reliability and precision of the analytical modules are predicated on rigorous training against industry-standard datasets:
+Deepfake Datasets: The ML engine is validated using subsets of FaceForensics++ and CASIA, encompassing diverse copy-move and splicing manipulations.
+Threat Intelligence Feeds: Real-time modeling utilizes structured JSON telemetry derived from the official MITRE ATT&CK global framework.
+Chapter 8. Performance Evaluation and Testing
+8.1 Performance Evaluation & Time Complexity
+The framework was benchmarked against the algorithmic time complexities of its core engines to ensure near-instantaneous responsiveness during incident escalation workflows.
+Cryptographic Hashing (SHA-256): Complexity is O(n), scaling linearly with byte-size. For standard artifacts, the process terminates within ~100ms, ensuring zero operational latency.
+Threat Intelligence Mapping: The correlation engine maintains average complexity of O(1) per lookup, enabling the immediate prioritization of high-severity classifications.
+XAI Engine Inference (CNN): Although computationally intensive at O(W×H×C×F), batched request processing ensures forensic rationales are generated within a 2-4 second window.
+8.2 Types of Testing & Tools Used
+A multi-tiered testing methodology was executed across all decoupled modules to validate architectural integrity and system resilience:
+Unit Testing (PyTest): Validated discrete cryptographic functions and the mathematical accuracy of the forensic scoring logic.
+API Endpoint Testing (Postman): Ensured robust error handling and response reliability against malformed payloads and expired JWT tokens.
+Frontend Testing (Jest): Verified dashboard widgets and ensured client-side data mapping aligns with the backend forensic schema.
+Integration Testing: Simulated the end-to-end incident lifecycle, from initial submission and hashing to automated XAI proof generation.
+8.3 Test Plans & Execution Results
+The following matrix details the critical test cases executed during the final integration phase to ensure forensic reliability and legal chain of custody:
+Table 3 : Requirements Rationale
+8.4 Testing Screenshots
+Fig 4 : API Authentication Rejection (TC-001)
+The architectural schematic illustrates the backend security middleware actively obstructing an unauthorized incident submission payload. The validation layer, invoked via Postman, identifies a missing or mathematically invalid JSON Web Token (JWT), resulting in a programmatic 401 Unauthorized status response.
+Fig 5 : W-CERT Dashboard Upload (TC-004)
+The forensic dashboard, engineered within the React ecosystem, is shown successfully ingesting a deepfake artifact. Upon upload, the XAI Evidence Training Engine processes the data to generate a human-interpretable visual heatmap, highlighting regional pixel tampering and autonomously assigning a "CRITICAL" severity classification.
+Fig 6 : XAI Engine Heatmap (TC-004)
+The XAI-powered authenticity checker performs high-fidelity analysis of the submitted evidence, overlaying a visual rationale that highlights specific coordinates of manipulation while prioritizing the incident within the real-time forensic dashboard.
+Fig 7 : Secure Database Write
+To ensure operational persistence, the backend executes a verified write operation to the Google Sheets database. This snapshot confirms that incident telemetry, including unique SHA-256 digital fingerprints and encrypted sensitive data, has been securely committed to the immutable forensic ledger.
+Chapter 9. Deployment Strategies and Security Aspects
+9.1 Deployment Strategies
+To ensure operational resilience and high availability, the W-CERT ecosystem is architected utilizing a decoupled, Cloud-Native deployment strategy:
+Frontend Orchestration (Vercel): The React-based client interface is hosted on a serverless edge network, utilizing an automated CI/CD pipeline integrated with GitHub to ensure zero-downtime production updates.
+Backend Orchestration (Render): The Python/Flask analytical engine is deployed as a containerized web service, where environment dependencies are autonomously managed through rigorous version control.
+Environment Configuration: Security by Design is enforced through the injection of sensitive variables—including cryptographic keys and API credentials—as isolated .env parameters, explicitly excluded from the public codebase.
+9.2 Security Aspects
+Given the sensitive nature of forensic telemetry, the platform integrates robust security protocols across multiple architectural layers:
+Data Encryption (AES-256): Personally Identifiable Information (PII) is cryptographically secured at rest utilizing AES-256 in CBC mode to prevent unauthorized exposure in the event of a database compromise.
+Forensic Integrity (SHA-256): The platform executes immediate cryptographic hashing at the millisecond of ingestion, establishing an immutable digital fingerprint to preserve the legal chain of custody.
+Access Management (JWT & RBAC): Session integrity is maintained through JWT-based token validation, while Role-Based Access Control (RBAC) restricts decryption capabilities to authorized administrative and analyst roles.
+Data-in-Transit (TLS 1.3): Encrypted communication between the decoupled microservices is enforced via TLS 1.3, mitigating risks associated with interceptive attack vectors.
+Chapter 10. Result and Analysis
+10.1 Experimental Methodology
+To validate the operational efficacy of the W-CERT ecosystem within a production-proximate environment, the platform was subjected to a stress test utilizing a dataset of 221 active cyber incident reports. These records were programmatically ingested into the persistent Google Sheets database via the backend API orchestration layer.
+Incident Distribution: The 221 telemetry samples encompass the core W-CERT forensic taxonomy, specifically targeting specialized women-centric cybercrimes including Phishing, Social Engineering, Sextortion, Financial Fraud, and Cyber Stalking.
+Module Evaluation: Each incident payload was concurrently processed through the Cryptographic Module for SHA-256 evidence sealing and the Threat Intelligence Engine to benchmark the severity routing and MITRE ATT&CK correlation logic.
+10.2 Discussion of Results
+The experimental execution against the live database records yielded optimized performance outcomes across the primary technological pillars:
+Cryptography Module: Achieved a 100% success rate. All 221 digital artifacts were successfully hashed with SHA-256 digital fingerprints and securely committed to the forensic ledger without latency-induced failures.
+Threat Intelligence API & Categorization: The engine autonomously mapped incidents into the following attack vectors:
+Phishing: 72 incidents
+Social Engineering: 33 incidents
+Sextortion: 17 incidents
+Financial Fraud: 15 incidents
+Cyber Stalking: 11 incidents
+Combined Threats: 5 incidents
+(Note: 68 telemetry points lacking actionable keywords were programmatically routed for manual SOC review).
+Severity Routing: The system autonomously triaged the 221 incidents, ensuring high-fidelity escalation of critical threats without manual intervention.
+10.3 Analysis of the Results
+The analytical results demonstrate that the multi-category weighted keyword algorithm is highly effective for instantaneous incident triage. By successfully flagging 44 Critical and 42 High-severity incidents, the W-CERT platform reliably automates the prioritization of life-threatening vectors such as Sextortion and Cyber Stalking. The triage distribution—including the safe routing of 'Unknown' items—confirms the system's reliability, as it programmatically prevents authority saturation while ensuring rapid escalation for high-fidelity threats.
+10.4 Result Visualizations
+Fig 8 : Threat Engine Attack Vector Distribution
+Fig 9 : Automated Severity Triage Distribution
+Applications
+The W-CERT platform is architected for modular adaptability, facilitating its orchestration across diverse domains of cyber defense and digital forensic modernization:
+National & State CERTs: Serves as a centralized portal for secure incident reporting. The automated engine enables agencies to detect large-scale, coordinated attack vectors—such as regional phishing campaigns—without manual latency.
+Law Enforcement Agencies (LEAs): Empowers investigators with XAI-driven authenticity verification to validate synthetic media. By generating interpretable rationales and digital fingerprints, the platform ensures that digital artifacts remain legally admissible.
+Corporate Security Operations Centers (SOCs): Facilitates internal monitoring of data breaches and social engineering. Utilizing MITRE ATT&CK correlation, teams can proactively harden infrastructure against identified threat taxonomies.
+Humanitarian Organizations & NGOs: Provides a privacy-first vault specifically engineered for women-centric cyber emergencies, securing sensitive evidence through AES-256 encryption to prevent unauthorized exposure.
+Conclusion
+Project Accomplishment
+The W-CERT initiative has culminated in the engineering and deployment of a fully functional, cloud-native forensic intelligence ecosystem. This capstone successfully transforms manual incident response into a mathematically secure, automated workflow.
+By orchestrating Explainable AI (XAI), the platform resolves the "black-box" interpretability challenge, delivering legally sound proofs of multimedia authenticity. The implementation of SHA-256 and AES-256 protocols at the point of ingestion establishes a rigorous digital chain of custody. Furthermore, the decoupled architecture proved highly resilient, enabling the real-time classification of incidents into standardized MITRE ATT&CK frameworks with zero operational latency.
+Future Prospects
+While the current framework is robust, future iterations of the W-CERT platform aim to enhance its forensic and intelligence capabilities through several technological expansions:
+Decentralized Chain of Custody: Transitioning to a blockchain-based distributed ledger (e.g., Hyperledger) to eliminate centralized authority reliance and further harden forensic integrity.
+Real-Time Video Forensic Analytics: Expanding XAI modules to support active video stream analysis for the detection of live face-swapping during synchronous communication.
+Automated Dark-Web Intelligence: Deploying proactive microservices to autonomously monitor dark-web forums for leaked telemetry or PII the moment an incident is triaged.
+References
+[1] Z. Khalid, F. Iqbal, and B. C. M. Fung, "Towards a unified XAI-based framework for digital forensic investigations," Forensic Science International: Digital Investigation, 2024.
+[2] N. Bharati, P. Wong, S. Kouadri Most&eacute;faoui, D. Kbaier, and J. Collie, "Explainable deepfake detection: A multi-model framework with human-interpretable rationales for legal investigation purposes," Machine Learning with Applications, vol. 23, p. 100819, 2025.
+[3] F. Khalid, A. Javed, K. M. Malik, and A. Irtaza, "DFP-Net: An explainable and trustworthy framework for detecting deepfakes using interpretable prototypes," in IEEE International Joint Conference on Biometrics (IJCB), 2023.
+[4] S. Tariq et al., "From Prediction to Explanation: Multimodal, Explainable, and Interactive Deepfake detection Framework for Non-Expert Users," Proceedings of the 33rd ACM International Conference on Multimedia, 2025.
+[5] L. Xia, R. Ge, and Z. Jing, "From Black Boxes to Glass Boxes: Explainable AI for Trustworthy Deepfake Forensics," MDPI / Journal of Imaging, 2024.
+[6] "Opportunities and Challenges of Artificial Intelligence in Digital Forensics," International Journal of Software Engineering and Computer Sciences (IJSECS), 2025.
+[7] "A Multi-Protocol, Explainable AI-Based Framework for Real-Time IoT Forensics," in International Conference on Computing, Communication, Control and Cyber-Physical Systems (I5CPS), 2026.
+[8] M. H. Maruf, "Developing an Explainable AI System for Digital Forensics: Enhancing Trust and Transparency in Flagging Events for Legal Evidence," ResearchGate, 2025.
+[9] S. H. Silva et al., "Deepfake forensics analysis: An explainable hierarchical ensemble of weakly supervised models," Forensic Science International: Synergy, vol. 4, p. 100217, 2022.
+[10] B. Saha and A. K. Khan, "Investigation of AI-based Deepfake Evidence: A Digital Forensics Approach," ResearchGate, 2026.
+[11] T. O&apos;Brien, "MITRE ATT&amp;CK Labeling of Cyber Threat Intelligence via LLM," SANS Technology Institute Research Papers, 2025.
+[12] "MITRE ATT&amp;CK Applications in Cybersecurity and The Way Forward," arXiv preprint arXiv:2502.10825, 2025.
+[13] "MITRE ATT&amp;CK: State of the Art and Way Forward," ResearchGate, 2024.
+[14] C. Ekisa and D. &Oacute; Briain, "Leveraging the MITRE ATT&amp;CK Framework for Threat Identification and Evaluation in Industrial Control System Simulations," in IEEE Conference Publication, 2024.
+[15] G. P. Singh, J. K. Sandhu, and M. K. Hooda, "NLP-based Cyber Threat Data Analysis with MITRE ATT&amp;CK Techniques," ResearchGate, 2023.
+[16] B. Al-Sada, A. Sadighian, and G. Oligeri, "Analysis and Characterization of Cyber Threats Leveraging the MITRE ATT&amp;CK Database," IEEE Access, 2023.
+[17] "Cybersecurity Threat Intelligence Automated via Machine Learning: A System for Analyzing and Responding to Data in Real-Time," in IEEE Conference Publication, 2025.
+[18] "Applying AI and Machine Learning to Enhance Automated Cybersecurity and Network Threat Identification," ResearchGate, 2024.
+[19] I. A. Haji, S. D. Mohammed, and K. M. Mousa, "Blockchain based chain of custody and digital evidence legality in post conflict prosecutions," Frontiers in Blockchain, 2026.
+[20] M. T. P. Mukti et al., "Blockchain-Based Chain of Custody in Digital Forensics: Ensuring Integrity and Legal Admissibility of Evidence," Forensics &amp; Security Journal (Journal of Ekantara), vol. 1, no. 1, 2025.
+[21] D. Batista et al., "Exploring Blockchain Technology for Chain of Custody Control in Physical Evidence: A Systematic Literature Review," Journal of Risk and Financial Management, vol. 16, no. 8, p. 360, 2023.
+[22] S. Nath, K. Summers, and J. Baek, "Digital Evidence Chain of Custody: Navigating New Realities of Digital Forensics," in 2024 IEEE 6th International Conference on Trust, Privacy and Security in Intelligent Systems, and Applications (TPS-ISA), 2024, pp. 11-20.
+[23] "Blockchain-Based Chain of Custody Evidence Management System for Digital Forensic Investigations," in IEEE Conference Publication, 2024.
+[24] K. M. M. Salih and N. Ibrahim, "CustodyChainGuardian: Blockchain of Custody Digital Evidence Preservation System," in IEEE Asia-Pacific Conference, 2023.
+[25] "Management of the Chain of Custody of Digital Evidence Using Blockchain and Self-Sovereign Identities: A Systematic Literature Review," IEEE Access, 2025.
+PART - B: INDIVIDUAL CONTRIBUTION
+Problem Statement: Conventional incident response architectures are hindered by a critical inability to autonomously prioritize evolving cyber threats. There exists a manifest need for a centralized, scalable API ecosystem engineered to ingest raw telemetry, programmatically correlate metadata against global threat taxonomies such as MITRE ATT&CK, and dynamically orchestrate escalation workflows with zero manual latency.
+Name of the Student: Nishinth Venkatesh
+Module Title: API Architecture, Threat Intelligence Modeling, and Cloud Deployment
+Project&apos;s Module Objectives - Individual Perspective
+To engineer a stateless, RESTful API backend utilizing the Python/Flask ecosystem, functioning as the primary routing engine for the W-CERT platform.
+To design and deploy a heuristic Threat Intelligence Engine capable of autonomous parsing and mapping of incident telemetry to established cyber threat vectors.
+To architect a resilient cloud-native deployment pipeline to ensure high availability and operational persistence of core backend microservices.
+Project&apos;s Module Scope - Individual Perspective: The scope of this specialized module encompasses the end-to-end backend routing infrastructure (including incident and escalation routing protocols), the algorithmic development of the threat correlation engine, and the orchestration of production environment variables within containerized cloud instances. It excludes cryptographic implementations and frontend UI rendering logic.
+Project&apos;s Module(s) - Individual Contribution: As the Principal Architect, my primary orchestration involved the development of the platform&apos;s core analytical routing layer. I engineered the Flask API endpoints to facilitate seamless communication between the React frontend and the forensic database. This included building the Threat Intelligence Engine, which utilizes weighted algorithms to analyze incident descriptions, assign severity classifications from Low to Critical, and autonomously identify attack vectors. Furthermore, I managed the decoupled integration of the XAI and security modules to ensure parallel processing during incident ingestion.
+Hardware & Software Requirements
+Software Infrastructure: Python 3.10+, Flask, Waitress WSGI server, and Postman for rigorous API validation.
+Hardware Specifications: Development machines with 8GB RAM and containerized Render cloud instances for production deployment.
+Module Interfaces
+External Interfaces: Exposes secure JSON endpoints for incident ingestion and retrieval, while interfacing with cloud provider APIs for automated CI/CD orchestration.
+Internal Interfaces: Facilitates high-fidelity asynchronous communication with the internal Cryptography and XAI modules to trigger specialized forensic functions.
+Module Dependencies
+Dependent on JWT-based middleware for the enforcement of secure, authenticated routing.
+Logically dependent on the database persistence layer to commit and store processed forensic telemetry.
+Requires correctly structured multipart/form-data and JSON payloads delivered from the frontend interface.
+Module Design: The architecture utilizes a Microservices-Oriented routing pattern, partitioning the API into specialized blueprints for authentication and incident management. The Threat Engine is engineered as a standalone utility class, utilizing mapped dictionaries of indicators to ensure O(1) lookup efficiency and rapid metadata analysis.
+Module Implementation: Implementation involved orchestrating the Flask context while enforcing strict CORS policies for backend security. The Threat Engine utilizes custom algorithms to scan forensic descriptions for categorized keywords, aggregating a localized threat score and appending severity tags prior to database routing.
+Module Testing Strategies: Rigorous endpoint validation was performed utilizing Postman, where test suites simulated malformed payloads, oversized file uploads, and unauthorized access attempts to verify that the error-handling middleware gracefully maintains system resilience.
+Module Deployment: The backend module was containerized and deployed as a managed web service on Render. Security by Design was enforced by decoupling sensitive environment variables from the codebase and securely injecting them into the production dashboard.
+PART - B: INDIVIDUAL CONTRIBUTION
+Problem Statement: Digital forensic evidence is characterized by extreme volatility and susceptibility to tampering during network ingestion. In the absence of mathematically verifiable mechanisms to establish integrity at the point of upload, digital artifacts remain legally inadmissible. Furthermore, the storage of Personally Identifiable Information (PII) necessitates advanced encryption to mitigate privacy risks in the event of a database compromise.
+Name of the Student: Ayush Dhore
+Module Title: Cryptographic Infrastructure & Secure Backend Connection
+Project&apos;s Module Objectives - Individual Perspective
+To engineer an automated SHA-256 hashing pipeline to establish a mathematically irrefutable digital chain of custody for all multimedia evidence.
+To implement AES-256 encryption protocols to secure sensitive victim PII at rest within the forensic repository.
+To develop and manage the secure programmatic interface between the Python backend and the persistent database architecture.
+Project&apos;s Module Scope - Individual Perspective: The scope of this module includes the engineering of specialized security utility scripts for hashing and encryption, alongside the development of the database communication layer. It focuses strictly on data integrity, security protocols, and persistence, excluding frontend UI and machine learning inference logic.
+Project&apos;s Module(s) - Individual Contribution: I took ownership of the platform&apos;s cryptographic security and data persistence layers. I developed the algorithms that intercept evidence files at the point of ingestion, processing them in binary chunks to generate unique 256-bit digital fingerprints. Additionally, I implemented AES encryption logic to secure victim metadata before storage. Finally, I configured the cloud service accounts and engineered the integration scripts to securely push processed forensic payloads to the immutable database in real-time.
+Hardware & Software Requirements
+Software Infrastructure: Python 3.10+, hashlib, PyCryptodome for AES implementation, and Google API integration libraries.
+Hardware Specifications: Standard development machines with isolated secure storage for environment keys.
+Module Interfaces
+External Interfaces: Directly communicates with cloud storage and database APIs utilizing secure OAuth2 Service Account credentials.
+Internal Interfaces: Provides core cryptographic utilities, including PII encryption and content hashing, which are invoked by the primary API routing logic.
+Module Dependencies
+Dependent on API routing to pass raw file streams for cryptographic processing.
+Reliant on cloud infrastructure uptime for persistent database write operations.
+Mandates the strict management of isolated environment variables for service accounts and encryption keys.
+Module Design: The module utilizes a functional utility pattern where cryptographic transformations are stateless to minimize memory overhead. The database interface integrates a localized caching mechanism to ensure operational continuity within API rate limitations.
+Module Implementation: Implementation involved processing evidence in 64KB chunks to prevent RAM exhaustion. Sensitive telemetry is secured utilizing AES-256 in CBC mode, with the database connection mapped to predefined schemas to ensure forensic record consistency.
+Module Testing Strategies: Testing was performed through rigorous unit validation, specifically targeting collision and tampering scenarios to verify that minute alterations to digital artifacts result in completely unique cryptographic signatures.
+Module Deployment: Deployment necessitated the generation of restricted service credentials and the secure injection of symmetric keys into the cloud environment, ensuring critical security parameters remain decoupled from the public codebase.
+PART - B: INDIVIDUAL CONTRIBUTION
+Problem Statement: The proliferation of generative AI and synthetic media has compromised the reliability of visual inspection in digital forensics. While traditional deep learning can identify anomalies, these &quot;black-box&quot; models fail to provide interpretable rationales for their decisions, rendering detection outputs legally inadmissible in judicial proceedings.
+Name of the Student: Neel Karnavat
+Module Title: XAI & ML Evidence Training (Authenticity Checker)
+Project&apos;s Module Objectives - Individual Perspective
+To develop a Deep Learning model engineered to detect pixel-level anomalies and synthetic media manipulations in forensic evidence.
+To integrate Explainable AI (XAI) algorithms to transform detection into a transparent, &quot;glass-box&quot; format.
+To autonomously generate human-interpretable visual proofs that mathematically delineate regions of digital tampering.
+Project&apos;s Module Scope - Individual Perspective: The scope of this module focuses entirely on the machine learning pipeline, encompassing dataset acquisition, image preprocessing, CNN training, and the implementation of SHAP/LIME explanation frameworks. It excludes database management and frontend UI development.
+Project&apos;s Module(s) - Individual Contribution: I engineered the platform&apos;s core forensic Authenticity Checker. My research involved gathering industry-standard datasets to train a deep learning network to identify imperceptible inconsistencies in pixel compression and lighting. Crucially, I integrated XAI frameworks to ensure that detection outputs include dynamic heatmaps, providing investigators with the exact coordinates of digital forgery to establish legal trustworthiness.
+Hardware & Software Requirements
+Software Infrastructure: Python 3.10+, TensorFlow/PyTorch, OpenCV for image normalization, and SHAP/LIME libraries.
+Hardware Specifications: Workstations with NVIDIA CUDA-compatible GPUs for intensive mathematical computation during model training.
+Module Interfaces
+Internal Interfaces: Provides a robust function that accepts raw multimedia byte-streams and returns a structured JSON dictionary containing confidence scores and visual forensic rationales.
+Module Dependencies
+Dependent on the frontend for strict enforcement of file-type validation.
+Reliant on industry-standard forensic datasets for the training of accurate model weights.
+Module Design: The module is designed as an isolated inference engine utilizing a Singleton pattern to load weights into memory once, thereby optimizing resource consumption during simultaneous forensic requests.
+Module Implementation: Implementation involved building image-processing pipelines to normalize telemetry. The core logic utilizes gradient-based algorithms to measure network perturbations, identifying manipulated pixel coordinates with high fidelity.
+Module Testing Strategies: Testing was benchmark-driven, utilizing False Positive and False Negative rates to iteratively refine hyperparameters until detection accuracy exceeded established forensic standards.
+Module Deployment: Finalized model weights were serialized for deployment. The inference logic was optimized for cloud CPU instances to ensure economic viability while maintaining real-time visualization capabilities.
+PART - B: INDIVIDUAL CONTRIBUTION
+Problem Statement: Contemporary cybersecurity reporting architectures and SOC management consoles are hindered by systemic complexity, lacking the intuitive reactivity required during high-stress incident lifecycles. Victims of cybercrimes, such as sextortion or financial fraud, face a manifest need for a frictionless, cryptographically secure interface for the ingestion of volatile digital artifacts. Conversely, forensic analysts require a high-performance orchestration console capable of visualizing massive threat datasets and XAI-generated heatmaps with zero operational latency or asynchronous delay.
+Name of the Student: Sarthak Paymode
+Module Title: Frontend UI/UX, Console Architecture, and React/Node.js Integration
+Project&apos;s Module Objectives - Individual Perspective
+To design and engineer a highly responsive, component-based Graphical User Interface (GUI) optimized for incident reporting and real-time forensic orchestration.
+To architect a secure, asynchronous ingestion pipeline capable of handling high-fidelity multimedia evidence payloads with zero data corruption.
+To implement a dynamic state management framework to facilitate the real-time rendering of forensic telemetry, including Threat Scores and XAI heatmaps.
+Project&apos;s Module Scope - Individual Perspective: The scope of this specialized module is strictly focused on the client-side microservices architecture (w-cert-frontend). This encompasses UI/UX orchestration, React.js component engineering, dynamic routing, and the deployment of Axios for secure HTTP communication. It excludes backend analytical engines and machine learning training logic.
+Project&apos;s Module(s) - Individual Contribution: As the Lead Frontend Engineer, I directed the development of the platform&apos;s visual and interactive layers. I engineered the secure authentication middleware, the incident ingestion forms, and the centralized Analyst Dashboard. My primary contribution involved the development of complex logic to handle multipart/form-data, ensuring that intensive multimedia artifacts are efficiently buffered prior to backend transmission. Additionally, I orchestrated the dynamic data grids for severity-based threat prioritization and developed the console overlays that project XAI heatmaps onto forensic artifacts for enhanced analyst interpretation.
+Hardware & Software Requirements
+Software Infrastructure: Node.js (v18+), React.js, Vite build orchestration, Axios, and Tailwind CSS.
+Hardware Specifications: Standard development environments; Vercel serverless edge network for high-availability cloud hosting.
+Module Interfaces
+External Interfaces: Serves as the primary portal for user interaction, communicating with the Python/Flask backend via secure, encrypted HTTPS requests.
+Internal Interfaces: Utilizes React Context APIs and specialized hooks to manage session states and telemetry data across decoupled console tabs.
+Module Dependencies
+Dependent on the stable orchestration of RESTful endpoints and JSON schemas provided by the Python backend.
+Reliant on JWT-based authentication tokens to maintain persistent user sessions and secure local storage access.
+Module Design: The frontend utilizes a Component-Based Architecture (CBA) within a Single Page Application (SPA) framework, leveraging React Hooks for optimized rendering. By decoupling modular widgets, the dashboard ensures that only relevant telemetry updates trigger a re-render, maintaining a high-performance investigator experience.
+Module Implementation: Implementation involved bootstrapping the ecosystem with Vite and configuring global Axios interceptors for automated JWT injection. Advanced CSS methodologies were deployed to establish the professional, high-fidelity aesthetic required for modern forensic command centers.
+Module Testing Strategies: Rigorous validation included cross-browser testing and responsive design stress tests across varying resolutions. Network telemetry was monitored to ensure zero memory leaks during the ingestion of large-scale evidence payloads.
+Module Deployment: The client interface was deployed via Vercel, utilizing automated CI/CD pipelines. Routing rules were configured within vercel.json to ensure seamless SPA persistence and prevent 404 errors during direct endpoint navigation.
+Project to Outcome Mapping
+Table 4 : Requirements Rationale

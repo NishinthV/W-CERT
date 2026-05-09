@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>W-CERT Poster - A2 Print</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: { extend: { fontFamily: { sans: ['Inter','sans-serif'], display: ['Orbitron','sans-serif'] },
+                colors: { cyber: { dark:'#050505', blue:'#00f0ff', orange:'#f97316', red:'#ff003c' } } } }
+        }
+    </script>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            background-color:#050505;
+            background-image: radial-gradient(circle at 15% 50%, rgba(0,240,255,0.08), transparent 25%), radial-gradient(circle at 85% 30%, rgba(249,115,22,0.08), transparent 25%);
+            color:#e2e8f0; width:4961px; height:7016px; overflow:hidden; padding:80px;
+            display:flex; flex-direction:column; font-family:'Inter',sans-serif;
+        }
+        .gp { background:rgba(15,23,42,0.6); backdrop-filter:blur(12px); border:2px solid rgba(0,240,255,0.2); box-shadow:0 8px 60px rgba(0,0,0,0.5); }
+        .gl { box-shadow:0 0 30px rgba(0,240,255,0.15), inset 0 0 40px rgba(0,240,255,0.05); }
+        .nb { text-shadow:0 0 20px rgba(0,240,255,0.5); }
+        .no { text-shadow:0 0 20px rgba(249,115,22,0.5); }
+        .nr { text-shadow:0 0 20px rgba(255,0,60,0.5); }
+        .st { font-family:'Orbitron',sans-serif; letter-spacing:0.08em; text-transform:uppercase; }
+        .fa { width:6px; height:80px; background:linear-gradient(to bottom,#00f0ff,transparent); margin:12px auto; }
+        .fb { border:3px solid rgba(0,240,255,0.4); background:rgba(0,10,20,0.8); padding:36px 60px; text-align:center; font-weight:700; font-size:44px; border-radius:20px; color:#e2e8f0; }
+        @media print { body { width:420mm; height:594mm; -webkit-print-color-adjust:exact!important; print-color-adjust:exact!important; margin:0; padding:10mm; } @page { size:420mm 594mm; margin:0; } }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="gp gl rounded-2xl" style="padding:30px 40px; margin-bottom:35px; border-top:4px solid #00f0ff; display:flex; align-items:flex-start; justify-content:space-between;">
+        <div style="max-width:520px;">
+            <p style="font-size:26px; color:#cbd5e1; font-weight:600; line-height:1.7;">Final Year BTech CSF</p>
+            <p style="font-size:26px; color:#cbd5e1; font-weight:600; line-height:1.7;">MIT World Peace University</p>
+            <p style="font-size:26px; color:#cbd5e1; font-weight:600; line-height:1.7;">Guide - Dr. Vinayak Musale</p>
+        </div>
+        <div style="text-align:center; flex:1; padding:0 40px;">
+            <h1 class="nb" style="font-family:'Orbitron',sans-serif; font-size:96px; font-weight:900; background:linear-gradient(to right,#00f0ff,#ffffff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:0.1em; margin-bottom:8px;">W-CERT</h1>
+            <h2 class="no" style="font-family:'Orbitron',sans-serif; font-size:30px; color:#f97316; letter-spacing:0.15em; text-transform:uppercase; line-height:1.4;">Women-Centric Cyber<br>Emergency Response Team</h2>
+            <div style="margin-top:16px; display:inline-flex; flex-direction:column; align-items:center;">
+                <div style="width:56px; height:56px; border-radius:50%; border:3px solid #4ade80; display:flex; align-items:center; justify-content:center;">
+                    <i data-lucide="check" style="width:28px; height:28px; color:#4ade80;"></i>
+                </div>
+                <span style="font-family:'Orbitron',sans-serif; color:#00f0ff; font-size:18px; letter-spacing:0.2em; margin-top:6px;">W-CERT</span>
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <p style="font-size:15px; color:#9ca3af; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;">Scan to View Project</p>
+            <div style="width:140px; height:140px; background:white; border-radius:12px; display:flex; align-items:center; justify-content:center;">
+                <svg viewBox="0 0 100 100" width="130" height="130"><rect width="100" height="100" fill="white"/><text x="50" y="55" text-anchor="middle" font-size="10" fill="#333">QR CODE</text></svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main style="display:grid; grid-template-columns:1fr 1fr; gap:35px; flex:1; min-height:0;">
+
+        <!-- LEFT -->
+        <section class="gp gl rounded-2xl" style="padding:35px; display:flex; flex-direction:column;">
+            <div style="display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(0,240,255,0.3); padding-bottom:14px; margin-bottom:28px;">
+                <i data-lucide="settings" style="width:44px; height:44px; color:#00f0ff;"></i>
+                <h3 class="st nb" style="font-size:34px; color:#00f0ff;">Methodology & Architecture</h3>
+            </div>
+            <div style="display:flex; align-items:center; gap:24px; justify-content:center; margin-bottom:16px;">
+                <div style="text-align:center;"><i data-lucide="user" style="width:52px; height:52px; color:#9ca3af; margin:0 auto 4px;"></i><p style="font-size:22px; font-weight:700; color:#cbd5e1;">Victim</p></div>
+                <span style="color:#00f0ff; font-size:40px;">→</span>
+                <div class="fb">W-CERT Frontend</div>
+            </div>
+            <p style="text-align:center; color:#f97316; font-style:italic; font-size:22px; margin-bottom:8px;">Advanced Flow</p>
+            <div class="fa"></div>
+            <!-- AI Brain -->
+            <div style="width:100%; height:380px; border-radius:16px; overflow:hidden; border:1px solid rgba(249,115,22,0.3); position:relative; margin-bottom:12px;">
+                <div style="position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.8),transparent); z-index:10;"></div>
+                <img src="file:///C:/Users/nishi/.gemini/antigravity/brain/dafb135a-b8d8-4926-96b3-324ce76c1b9a/poster_ai_brain_1777832266141.png" alt="AI Brain" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <!-- XAI Engine -->
+            <div style="display:flex; gap:24px; margin-bottom:16px;">
+                <div style="max-width:300px; font-size:16px; color:#9ca3af; line-height:1.6;">
+                    <p style="margin-bottom:12px;">• <strong style="color:white;">ZERO-TRUST DATA VAULT IMPLEMENTATION</strong> (encrypting while encrypting all victim PII)</p>
+                    <p style="margin-bottom:12px;">• <strong style="color:white;">TECH</strong> details against women under-reporting and extortional awareness</p>
+                    <p>• <strong style="color:white;">ZERO-TRUST DATA VAULT</strong> allows implementations to encrypting threat and encrypting and processing (categorizing threat and mapping to legal code)</p>
+                </div>
+                <div style="flex:1; text-align:center;">
+                    <h4 style="font-size:26px; font-weight:700; color:white; margin-bottom:16px;">XAI Verification Engine</h4>
+                    <div style="text-align:left; padding-left:16px; font-size:20px; color:#cbd5e1; line-height:1.8;">
+                        <p>• <strong style="color:white;">AUTHENTICITY SCORING</strong><br><span style="font-size:16px;">(cross-referencing description vs. evidence)</span></p>
+                        <p style="margin-top:10px;">• <strong style="color:white;">RISK ASSESSMENT & IPC MAPPING</strong><br><span style="font-size:16px;">(categorizing threat and mapping to legal code)</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="fa"></div>
+            <!-- Shield -->
+            <div style="width:100%; flex:1; min-height:400px; border-radius:16px; overflow:hidden; border:1px solid rgba(0,240,255,0.3); position:relative; margin-bottom:12px;">
+                <div style="position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.8),transparent); z-index:10;"></div>
+                <p style="position:absolute; bottom:16px; left:16px; z-index:20; color:#00f0ff; font-weight:700; letter-spacing:0.15em; font-size:18px; text-transform:uppercase;">AES-128-CBC Zero-Trust Data Vault</p>
+                <img src="file:///C:/Users/nishi/.gemini/antigravity/brain/dafb135a-b8d8-4926-96b3-324ce76c1b9a/poster_centerpiece_1777832249817.png" alt="Cyber Shield" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <p style="font-size:18px; color:#9ca3af; text-align:center; margin-bottom:10px;">• <strong style="color:white;">AES-128-CBC ZERO-TRUST DATA VAULT</strong> (encrypting all victim PII)</p>
+            <div class="fa"></div>
+            <div class="fb">Database Layer</div>
+            <div class="fa"></div>
+            <div class="fb">Forensic Escalation Routing</div>
+        </section>
+
+        <!-- RIGHT -->
+        <div style="display:flex; flex-direction:column; gap:35px;">
+            <!-- Problem & Solution -->
+            <section class="gp gl rounded-2xl" style="padding:40px;">
+                <div style="display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(0,240,255,0.3); padding-bottom:14px; margin-bottom:32px;">
+                    <i data-lucide="alert-triangle" style="width:44px; height:44px; color:#00f0ff;"></i>
+                    <h3 class="st nb" style="font-size:34px; color:#00f0ff;">The Problem & The Solution</h3>
+                </div>
+                <h4 style="font-size:30px; font-weight:700; color:#f97316; margin-bottom:20px;">The Problem</h4>
+                <ul style="list-style:disc; padding-left:32px; font-size:23px; color:#cbd5e1; line-height:1.7; margin-bottom:32px;">
+                    <li style="margin-bottom:16px;">Cybercrimes against women suffer severe under-reporting due to fear, stigma, and awareness gaps, and lack of jurisdictional awareness.</li>
+                    <li>Traditional mechanisms are slow, intimidating, and lack forensic intelligence</li>
+                </ul>
+                <h4 style="font-size:30px; font-weight:700; color:#f97316; margin-bottom:20px;">The Solution</h4>
+                <ul style="list-style:disc; padding-left:32px; font-size:23px; color:#cbd5e1; line-height:1.7;">
+                    <li style="margin-bottom:16px;">A secure, anonymous, and jurisdiction-aware reporting platform.</li>
+                    <li style="margin-bottom:16px;">Bypasses intimidation and provides forensic integrity</li>
+                    <li><strong style="color:white;">ZERO-TRUST DATA VAULT IMPLEMENTATION:</strong> aes-128-cbc encrypting to isolate and encrypting mathematically threat and mapping to legal relevant victim PII</li>
+                </ul>
+            </section>
+
+            <!-- Tech Stack -->
+            <section class="gp gl rounded-2xl" style="padding:40px;">
+                <div style="display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(0,240,255,0.3); padding-bottom:14px; margin-bottom:28px;">
+                    <i data-lucide="server" style="width:44px; height:44px; color:#00f0ff;"></i>
+                    <h3 class="st nb" style="font-size:34px; color:#00f0ff;">Tech Stack & Deployment</h3>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px;">
+                    <div style="background:rgba(0,0,0,0.4); padding:24px; border-radius:12px; border:1px solid rgba(0,240,255,0.2);">
+                        <span style="color:#00f0ff; font-weight:700; font-size:22px; display:flex; align-items:center; gap:8px; margin-bottom:14px;"><i data-lucide="layout" style="width:22px; height:22px;"></i> Frontend Layer</span>
+                        <p style="font-size:21px; color:#cbd5e1; line-height:1.7;">React 18 • Vite<br>Tailwind CSS • Chart.js</p>
+                    </div>
+                    <div style="background:rgba(0,0,0,0.4); padding:24px; border-radius:12px; border:1px solid rgba(0,240,255,0.2);">
+                        <span style="color:#00f0ff; font-weight:700; font-size:22px; display:flex; align-items:center; gap:8px; margin-bottom:14px;"><i data-lucide="database" style="width:22px; height:22px;"></i> Backend Layer</span>
+                        <p style="font-size:21px; color:#cbd5e1; line-height:1.7;">Python Flask 3.0 • JWT<br>Gemini Engine Persistent</p>
+                    </div>
+                </div>
+                <div style="background:rgba(0,0,0,0.4); padding:24px; border-radius:12px; border:1px solid rgba(0,240,255,0.2);">
+                    <span style="color:#00f0ff; font-weight:700; font-size:22px; display:flex; align-items:center; gap:8px; margin-bottom:14px;"><i data-lucide="hard-drive" style="width:22px; height:22px;"></i> Database Layer</span>
+                    <p style="font-size:21px; color:#cbd5e1; line-height:1.7;">Google Sheets Serverless NoSQL via gspread with 60s in-memory caching to prevent Google API limits.</p>
+                </div>
+            </section>
+
+            <!-- Forensic Escalation -->
+            <section class="gp gl rounded-2xl" style="padding:40px; flex:1; border-bottom:4px solid #ff003c;">
+                <div style="display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,0,60,0.3); padding-bottom:14px; margin-bottom:32px;">
+                    <i data-lucide="siren" style="width:44px; height:44px; color:#ff003c;"></i>
+                    <h3 class="st nr" style="font-size:34px; color:#ff003c;">Forensic Escalation Routing</h3>
+                </div>
+                <ul style="list-style:disc; padding-left:32px; font-size:23px; color:#cbd5e1; line-height:1.7;">
+                    <li style="margin-bottom:24px;"><strong style="color:white;">SHA-256 Chain of Custody:</strong> All evidence is hashed at upload. Append-only audit logs track every view, download, and verification to ensure legal admissibility.</li>
+                    <li style="margin-bottom:24px;"><strong style="color:white;">Geo-IP Routing:</strong> The system silently captures victim state-level location upon submission even, deallocating upon and/or submission.</li>
+                    <li><strong style="color:white;">Dynamic LEW Enforcement Escalation:</strong> When an analyst clicks "Escalate", W-CERT automatically injects the exact contact details (Nodal Emails & Landlines) for the specific State's Cyber Crime Cell and Women's Commission.</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="gp gl rounded-2xl" style="padding:28px 40px; margin-top:35px; border-bottom:4px solid #f97316; text-align:center;">
+        <p style="font-size:26px;">
+            <span class="st" style="color:#f97316; font-weight:700; letter-spacing:0.1em;">PREPARED BY:</span>
+            <span style="color:white; font-weight:600; margin-left:12px;">Nishinth Venkatesh, Ayush Dhore, Sarthak Paymode, Neel Karnavat</span>
+        </p>
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

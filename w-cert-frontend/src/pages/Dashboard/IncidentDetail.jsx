@@ -137,7 +137,8 @@ const IncidentDetail = () => {
     if (error) return <div className="p-10 text-center text-alert-red">{error}</div>;
     if (!incident) return <div className="p-10 text-center">Incident not found</div>;
 
-    const score = parseInt(incident.threat_score) || 0;
+    const rawScore = parseInt(incident.threat_score) || 0;
+    const score = Math.min(rawScore, 100);
 
     // Fix for older incidents that lack a score breakdown (or fallback engine hits)
     let breakdown = incident.score_breakdown || {};

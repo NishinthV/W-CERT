@@ -156,7 +156,7 @@ const Report = () => {
                         <div className="space-y-6">
                             <div>
                                 <label className="block text-cyber-blue font-mono mb-2">
-                                    Contact Information (Optional)
+                                    Contact Information
                                 </label>
                                 <p className="text-xs text-gray-500 mb-4">Leave blank for anonymous reporting.</p>
                                 <input

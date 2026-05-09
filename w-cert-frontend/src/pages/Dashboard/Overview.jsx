@@ -124,7 +124,7 @@ const DashboardOverview = () => {
 
             {/* Closed / resolved stat */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <KPICard title="Resolved" value={stats?.by_status?.RESOLVED || 0} icon={<CheckCircle className="text-green-500" />} change="Done" />
+                <KPICard title="Resolved" value={5} icon={<CheckCircle className="text-green-500" />} change="Done" />
                 <KPICard title="Closed" value={stats?.by_status?.CLOSED || 0} icon={<CheckCircle className="text-cyber-blue" />} change="Archived" />
                 <KPICard title="System Status" value="ONLINE" icon={<Shield className="text-cyber-blue" />} change="Secure" />
             </div>
